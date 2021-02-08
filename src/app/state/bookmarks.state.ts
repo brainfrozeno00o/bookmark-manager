@@ -2,5 +2,5 @@
 import { Bookmark } from "../model/bookmark-model";
 
 export interface BookmarkState {
-    bookmarks: ReadonlyArray<Bookmark>;
+    bookmarks: Bookmark[];
 }

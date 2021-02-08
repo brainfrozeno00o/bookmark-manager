@@ -6,14 +6,14 @@ import { createReducer, on, Action } from "@ngrx/store";
 import * as BookmarkActions from "./bookmarks.actions";
 import { Bookmark } from "../model/bookmark-model";
 
-export const initialState: ReadonlyArray<Bookmark> = [];
+export const initialState: Bookmark[] = [];
 
 export const bookmarkReducer = createReducer(
     initialState,
     on(BookmarkActions.addBookmark, (state, bookmark) => {
-        return [...state, bookmark]
+        return [...state, bookmark];
     }),
     on(BookmarkActions.removeBookmark, (state, bookmark) => {
-        return state.filter((bm) => bm.title !== bookmark.title)
+        return state.filter((bm) => bm.title !== bookmark.title);
     }),
 );

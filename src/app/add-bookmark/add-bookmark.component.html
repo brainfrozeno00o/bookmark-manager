@@ -1,0 +1,17 @@
+<div>
+    <h2>Add Bookmark</h2>
+</div>
+<div>
+    <form (ngSubmit)="addToBookmark()">
+        <label>Title:
+            <input type="text" [(ngModel)]="title" name="title"/>
+        </label>
+        <label>Url:
+            <input type="text" [(ngModel)]="url" name="url"/>
+        </label>
+        <label>Group:
+            <input type="text" [(ngModel)]="group" name="group"/>
+        </label>
+        <button>Add Bookmark</button>
+    </form>
+</div>
