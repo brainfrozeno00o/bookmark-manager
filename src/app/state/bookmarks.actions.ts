@@ -1,0 +1,18 @@
+// file for actions - messages dispatched to update the state
+// createAction = returns a function when Action object is called
+// props = defining additional payload
+import { createAction, props } from "@ngrx/store";
+import { Bookmark } from "../model/bookmark-model";
+
+export const addBookmark = createAction(
+    '[Bookmark List] Add Bookmark',
+    props<Bookmark>()
+);
+
+export const removeBookmark = createAction(
+    '[Bookmark List] Remove Bookmark',
+    props<Bookmark>()
+);
+
+
+
