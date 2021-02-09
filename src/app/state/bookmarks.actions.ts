@@ -1,6 +1,3 @@
-// file for actions - messages dispatched to update the state
-// createAction = returns a function when Action object is called
-// props = defining additional payload
 import { createAction, props } from "@ngrx/store";
 import { Bookmark } from "../model/bookmark-model";
 

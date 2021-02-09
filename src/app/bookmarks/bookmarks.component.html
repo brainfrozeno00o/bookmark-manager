@@ -1,21 +1,41 @@
 <div *ngIf="bookmarks.length > 0">
-    <h2>Bookmarks</h2>
-    <div>
-        <mat-form-field appearance="fill">
-            <mat-label>Choose Bookmark Group</mat-label>
-            <mat-select (selectionChange)="showCurrentValue($event.value)" [(value)]="selected">
-                <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <h2>Your Bookmarks</h2>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose Bookmark Group</mat-label>
+                <mat-select (selectionChange)="showCurrentGroup($event.value)" [(value)]="selected" [(ngModel)]="selected">
+                    <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
-    <ul>
-        <li *ngFor="let bookmark of bookmarks">
-            <div>
-                <p>Bookmark Name:{{bookmark.title}}</p>
-                <p>Bookmark URL:{{bookmark.url}}</p>
-                <p>Bookmark Group:{{bookmark.group}}</p>
+    <div class="content">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="33%" fxFlex.lt-md="100%" fxFlex.md="50%" *ngFor="let bookmark of bookmarks$ | async">
+                <mat-card>
+                    <mat-card-content>
+                        <h2 class="title-class">{{bookmark.title}}</h2>
+                        <mat-divider></mat-divider>
+                        <br/>
+                        <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->
+                        <p>URL: <a href={{bookmark.url}}>Click here to go to link!</a> </p>
+                        <br/>
+                        <p>Group: {{bookmark.group}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="warn" (click)="removeBookmark(bookmark)">
+                            <mat-icon>delete</mat-icon>
+                            Delete Bookmark
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
+</div>
+<!-- Only show this part when there are no bookmarks at all -->
+<div *ngIf="bookmarks.length === 0">
+    <h2 class="d-flex justify-content-center">You have not put any bookmarks yet...</h2>
 </div>
 

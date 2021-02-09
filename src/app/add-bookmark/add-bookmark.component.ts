@@ -1,6 +1,6 @@
 // this page contains all the logic for adding a bookmark
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Bookmark } from '../model/bookmark-model';
 import { addBookmark } from '../state/bookmarks.actions';
@@ -13,25 +13,25 @@ import { addBookmark } from '../state/bookmarks.actions';
 
 
 export class AddBookmarkComponent implements OnInit {
-  title: string = '';
-  url: string = '';
-  group: string = '';
+  bookmarkForm = this.fb.group({
+    title: ['', Validators.required],
+    url: ['', Validators.required],
+    group: ['', Validators.required],
+  });
 
-  constructor(private store: Store) { }
+  hasFormError: boolean = false;
+
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  addToBookmark(bookmarkForm: NgForm): void {
-    const newBookmark : Bookmark = {
-      title: this.title,
-      url: this.url,
-      group: this.group,
-    }
-
-    bookmarkForm.reset();
-
+  addToBookmark(formDirective: FormGroupDirective): void {
+    this.bookmarkForm.get('url')?.patchValue('https://www.' + this.bookmarkForm.get('url')?.value);
+    const newBookmark: Bookmark = {...this.bookmarkForm.value};
     this.store.dispatch(addBookmark(newBookmark));
+    formDirective.resetForm();
+    this.bookmarkForm.reset();
   }
 
 }

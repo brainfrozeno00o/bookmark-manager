@@ -2,10 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { of, Observable, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { BookmarkState } from '../state/bookmarks.state';
-import { selectBookmarks } from '../state/bookmarks.selector'; 
+import { map, switchMap } from 'rxjs/operators';
 import { Bookmark } from '../model/bookmark-model';
+import { removeBookmark } from '../state/bookmarks.actions';
+import { selectBookmarksByGroup } from '../state/bookmarks.selector';
 
 @Component({
   selector: 'app-bookmarks',
@@ -13,39 +13,50 @@ import { Bookmark } from '../model/bookmark-model';
   styleUrls: ['./bookmarks.component.css']
 })
 export class BookmarksComponent implements OnInit {
-  bookmarks$: Observable<Bookmark[]>;
-  bookmarksSubscription!: Subscription;
-  bookmarks: Bookmark[] = [];
-  allBookmarks: Bookmark[] = [];
+  bookmarks$: Observable<Bookmark[]>; // the observable to get the current state
+  bookmarksSubscription!: Subscription; // to be used for unsubscribing once the component is destroyed
+  bookmarks: Bookmark[] = []; // this is needed as the helper for getting the groups, and also for determining the length of all bookmarks
 
   groups$: Observable<String[]>;
   groups: String[] = [];
   
   selected: String = "All"; // this is for the default option in the select options
 
-  constructor(private store: Store<BookmarkState>) { 
-    this.bookmarks$ = this.store.pipe(select(selectBookmarks));
-    this.groups$ = of(["All"]);
+  constructor(private store: Store<{ bookmarks: Bookmark[] }>) { 
+    this.bookmarks$ = this.store.pipe(select('bookmarks'));
+    // use the default option in creating the observable for the groups
+    this.groups$ = of([this.selected]);
   }
 
   ngOnInit(): void {
     this.bookmarksSubscription = this.bookmarks$.pipe(
       switchMap(x => {
+        // get all current bookmarks to be then used in the groups observable
         this.bookmarks = x;
-        this.allBookmarks = this.bookmarks;
+        // proceed with the inner observable of getting the groups
         return this.groups$;
       })
     ).subscribe(groups => {
       this.groups = [...groups, ...new Set(this.bookmarks.map(bookmark => bookmark.group))];
-      console.log(this.groups);
     })
   }
 
-  showCurrentValue(choice: String) {
-    this.bookmarks = this.allBookmarks; // reset to all bookmarks first
-    if (choice !== "All") {
-      this.bookmarks = this.bookmarks.filter(bookmark => bookmark.group === choice);     
+  // only invoked when the select/dropdown is changed
+  showCurrentGroup(choice: String) {
+    this.bookmarks$ = this.store.pipe((
+      select(selectBookmarksByGroup, choice)
+    ));
+  }
+
+  // invoked when clicking the delete bookmark
+  removeBookmark(bookmark: Bookmark) {
+    // if there is one more bookmark left for a specific group, force the selection back to All
+    if (this.bookmarks.filter(bmrk => bmrk.group === bookmark.group).length === 1) {
+      this.selected = "All";
+      this.showCurrentGroup(this.selected);
     }
+
+    this.store.dispatch(removeBookmark(bookmark));
   }
 
   // destroy subscription

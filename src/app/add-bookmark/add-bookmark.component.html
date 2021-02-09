@@ -1,17 +1,30 @@
 <div>
-    <h2>Add Bookmark</h2>
-</div>
-<div>
-    <form #bookmarkForm="ngForm" (ngSubmit)="addToBookmark(bookmarkForm)">
-        <label>Title:
-            <input type="text" [(ngModel)]="title" name="title"/>
-        </label>
-        <label>Url:
-            <input type="text" [(ngModel)]="url" name="url"/>
-        </label>
-        <label>Group:
-            <input type="text" [(ngModel)]="group" name="group"/>
-        </label>
-        <button>Add Bookmark</button>
-    </form>
+    <mat-card>
+        <h2 class="title-class">Add Bookmark</h2>
+        <mat-card-content>
+            <form [formGroup]="bookmarkForm" #bookmarkFormDirective="ngForm" (ngSubmit)="addToBookmark(bookmarkFormDirective)">
+                <mat-form-field class="full-width">
+                    <mat-label for="title">Name</mat-label>
+                    <input matInput type="text" formControlName="title" name="title" required/>
+                    <mat-error *ngIf="bookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>
+                </mat-form-field>
+                <br/>
+                <mat-form-field class="full-width">
+                    <mat-label>URL</mat-label>
+                    <span matPrefix>www.</span>
+                    <input matInput type="text" formControlName="url" name="url" required/>
+                    <mat-error *ngIf="bookmarkForm.get('url')?.errors?.required">Please input the URL.</mat-error>
+                </mat-form-field>
+                <br/>
+                <mat-form-field class="full-width">
+                    <mat-label>Group</mat-label>
+                    <input matInput type="text" formControlName="group" name="group" required/>
+                    <mat-error *ngIf="bookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>
+                </mat-form-field>
+                <br/>
+                <br/>
+                <button [disabled]="!bookmarkForm.valid" class="full-width button-color" mat-raised-button>Add Bookmark</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>

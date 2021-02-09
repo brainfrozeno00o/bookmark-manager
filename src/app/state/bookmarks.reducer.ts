@@ -1,8 +1,4 @@
-// this file defines the reducer for the bookmarks
-// it takes the current state and dispatched action in order to return
-// a new state
-
-import { createReducer, on, Action } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import * as BookmarkActions from "./bookmarks.actions";
 import { Bookmark } from "../model/bookmark-model";
 
@@ -15,6 +11,6 @@ export const bookmarkReducer = createReducer(
         else return [...state, bookmark];
     }),
     on(BookmarkActions.removeBookmark, (state, bookmark) => {
-        return state.filter((bm) => bm.title !== bookmark.title);
+        return state.filter((bm) => bm.title !== bookmark.title); // the bookmark title is the unique id of a bookmark
     }),
 );

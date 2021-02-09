@@ -7,12 +7,17 @@ import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot(
       { bookmarks: bookmarkReducer }
@@ -29,7 +35,12 @@ import { MatInputModule } from '@angular/material/input';
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,15 @@
+.content {
+    padding: 0px;
+}
+
+.content > mat-card {
+    margin-bottom: 16px;
+}
+
+/* to fix the alignment of the title in the card in the card-content */
+.title-class {
+    margin-bottom: 0px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+

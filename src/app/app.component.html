@@ -1,9 +1,13 @@
-<h2>Bookmark Manager</h2>
-<div>
-    <div>
-        <app-bookmarks></app-bookmarks>
-    </div>
-    <div>
-        <app-add-bookmark></app-add-bookmark>
+<div class="container">
+    <h2 style="text-align: center;">Bookmark Manager</h2>
+    <mat-divider></mat-divider>
+    <br/>
+    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="24px">   
+        <div fxFlex="75%">
+            <app-bookmarks></app-bookmarks>
+        </div>
+        <div fxFlex="25%">
+            <app-add-bookmark></app-add-bookmark>
+        </div>
     </div>
 </div>
