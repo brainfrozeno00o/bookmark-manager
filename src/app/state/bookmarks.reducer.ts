@@ -11,7 +11,8 @@ export const initialState: Bookmark[] = [];
 export const bookmarkReducer = createReducer(
     initialState,
     on(BookmarkActions.addBookmark, (state, bookmark) => {
-        return [...state, bookmark];
+        if (state.find(oneBookmark => oneBookmark.title === bookmark.title)) return state; // avoid duplicates based on title
+        else return [...state, bookmark];
     }),
     on(BookmarkActions.removeBookmark, (state, bookmark) => {
         return state.filter((bm) => bm.title !== bookmark.title);

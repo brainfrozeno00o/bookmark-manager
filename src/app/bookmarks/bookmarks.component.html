@@ -1,6 +1,21 @@
-<div *ngFor="let bookmark of bookmarks">
-    <p>Bookmark Name:{{bookmark.title}}</p>
-    <p>Bookmark URL:{{bookmark.url}}</p>
-    <p>Bookmark Group:{{bookmark.group}}</p>
+<div *ngIf="bookmarks.length > 0">
+    <h2>Bookmarks</h2>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose Bookmark Group</mat-label>
+            <mat-select (selectionChange)="showCurrentValue($event.value)" [(value)]="selected">
+                <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <ul>
+        <li *ngFor="let bookmark of bookmarks">
+            <div>
+                <p>Bookmark Name:{{bookmark.title}}</p>
+                <p>Bookmark URL:{{bookmark.url}}</p>
+                <p>Bookmark Group:{{bookmark.group}}</p>
+            </div>
+        </li>
+    </ul>
 </div>
 

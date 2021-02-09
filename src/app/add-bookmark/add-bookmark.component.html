@@ -2,7 +2,7 @@
     <h2>Add Bookmark</h2>
 </div>
 <div>
-    <form (ngSubmit)="addToBookmark()">
+    <form #bookmarkForm="ngForm" (ngSubmit)="addToBookmark(bookmarkForm)">
         <label>Title:
             <input type="text" [(ngModel)]="title" name="title"/>
         </label>
