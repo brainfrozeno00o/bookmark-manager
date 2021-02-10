@@ -26,11 +26,11 @@ export class AddBookmarkComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addToBookmark(formDirective: FormGroupDirective): void {
+  addBookmark(formDirective?: FormGroupDirective): void {
     this.bookmarkForm.get('url')?.patchValue('https://www.' + this.bookmarkForm.get('url')?.value);
     const newBookmark: Bookmark = {...this.bookmarkForm.value};
     this.store.dispatch(addBookmark(newBookmark));
-    formDirective.resetForm();
+    formDirective?.resetForm();
     this.bookmarkForm.reset();
   }
 
