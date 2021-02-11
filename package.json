@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -30,6 +30,7 @@
     "@ngrx/store": "^10.1.2",
     "@types/uuid": "^8.3.0",
     "bootstrap": "^4.6.0",
+    "foreman": "3.0.1",
     "jquery": "^3.5.1",
     "ngrx-store-localstorage": "^10.1.2",
     "rxjs": "^6.6.3",
