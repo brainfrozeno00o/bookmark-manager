@@ -3,16 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node serve.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "preinstall": "npm install -g @angular/cli",
     "postinstall": "ng build"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "~0.1101.4",
+    "@angular/compiler-cli": "~11.1.2",
+    "@angular/cli": "~11.1.4",
     "@angular/animations": "~11.1.2",
     "@angular/cdk": "^11.1.2",
     "@angular/common": "~11.1.2",
@@ -35,9 +37,6 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1101.4",
-    "@angular/cli": "~11.1.4",
-    "@angular/compiler-cli": "~11.1.2",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/uuid": "^8.3.0",
