@@ -17,8 +17,18 @@ import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ 
+      keys: ['bookmarks'],
+      rehydrate: true
+    })(reducer);
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +41,8 @@ import { bookmarkReducer } from './state/bookmarks.reducer';
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot(
-      { bookmarks: bookmarkReducer }
+      { bookmarks: bookmarkReducer },
+      { metaReducers }
     ),
     BrowserAnimationsModule,
     MatSelectModule,
