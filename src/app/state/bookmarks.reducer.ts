@@ -7,10 +7,11 @@ export const initialState: Bookmark[] = [];
 export const bookmarkReducer = createReducer(
     initialState,
     on(BookmarkActions.addBookmark, (state, bookmark) => {
-        if (state.find(oneBookmark => oneBookmark.title === bookmark.title)) return state; // avoid duplicates based on title
+        // avoid duplicates based on title and if they are in the same group
+        if (state.find(oneBookmark => oneBookmark.title === bookmark.title && oneBookmark.group === bookmark.group)) return state; 
         else return [...state, bookmark];
     }),
     on(BookmarkActions.removeBookmark, (state, bookmark) => {
-        return state.filter((bm) => bm.title !== bookmark.title); // the bookmark title is the unique id of a bookmark
+        return state.filter((bm) => bm.id !== bookmark.id); // the unique identifier is now based on ID
     }),
 );

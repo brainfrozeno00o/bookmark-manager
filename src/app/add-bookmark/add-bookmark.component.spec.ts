@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { BookmarkState } from '../state/bookmarks.state';
-import { addBookmark } from '../state/bookmarks.actions';
+import { addBookmark } from '../state/bookmarks.actions'; 
 
 describe('AddBookmarkComponent', () => {
   let component: AddBookmarkComponent;
@@ -69,7 +69,7 @@ describe('AddBookmarkComponent', () => {
     expect(component.bookmarkForm.valid).toBeTruthy();
   }));
 
-  it('Should dispatch to the store once the addBookmark is called', () => {
+  it('Should dispatch to the store once the addBookmark is called with a predefined custom ID', () => {
     const titleControl = component.bookmarkForm.controls['title'];
     const urlControl = component.bookmarkForm.controls['url'];
     const groupControl = component.bookmarkForm.controls['group'];
@@ -77,14 +77,16 @@ describe('AddBookmarkComponent', () => {
     titleControl.setValue('Facebook');
     urlControl.setValue('facebook.com');
     groupControl.setValue('Social');
+    const newBookmarkId = '1';
 
     const newBookmark = {
+      id: newBookmarkId,
       title: titleControl.value,
       url: 'https://www.' + urlControl.value,
       group: groupControl.value
     }
     // can be passed without the FormGroupDirective and it should still add to the store
-    component.addBookmark(); 
+    component.addBookmark(undefined, newBookmarkId); 
     
     expect(store.dispatch).toHaveBeenCalledWith(
       addBookmark(newBookmark)

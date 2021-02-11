@@ -50,21 +50,25 @@ describe('BookmarksComponent', () => {
   
     mockBookmarksSelector = store.overrideSelector('bookmarks', [
       {
+        id: '1',
         title: 'Facebook',
         url: 'facebook.com',
         group: 'Social'
       },
       {
+        id: '2',
         title: 'Twitter',
         url: 'twitter.com',
         group: 'Social'
       },
       {
+        id: '3',
         title: 'Instagram',
         url: 'instagram.com',
         group: 'Social'
       },
       {
+        id: '4',
         title: 'Synpulse',
         url: 'synpulse.com',
         group: 'Work'
@@ -79,12 +83,14 @@ describe('BookmarksComponent', () => {
   it('Should remove the bookmark when dispatch is called', () => {
     spyOn(store, 'dispatch').and.callFake(() => {});
     component.removeBookmark({
+      id: '4',
       title: 'Synpulse',
       url: 'synpulse.com',
       group: 'Work'
     });
     expect(store.dispatch).toHaveBeenCalledWith(
       removeBookmark({
+        id: '4',
         title: 'Synpulse',
         url: 'synpulse.com',
         group: 'Work'
