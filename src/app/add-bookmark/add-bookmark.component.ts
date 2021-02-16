@@ -20,8 +20,6 @@ export class AddBookmarkComponent implements OnInit {
     group: ['', Validators.required],
   });
 
-  hasFormError: boolean = false;
-
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {

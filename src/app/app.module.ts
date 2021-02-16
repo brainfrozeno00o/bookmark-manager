@@ -11,11 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { BookmarksComponent, EditBookmarkDialog } from './bookmarks/bookmarks.component';
 
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
@@ -33,7 +34,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   declarations: [
     AppComponent,
     BookmarksComponent,
-    AddBookmarkComponent
+    AddBookmarkComponent,
+    EditBookmarkDialog
   ],
   imports: [
     BrowserModule,
@@ -52,8 +54,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MatCardModule,
     MatDividerModule,
     MatIconModule,
+    MatDialogModule,
     FlexLayoutModule
   ],
+  entryComponents: [EditBookmarkDialog],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -12,6 +12,10 @@ export const bookmarkReducer = createReducer(
         else return [...state, bookmark];
     }),
     on(BookmarkActions.removeBookmark, (state, bookmark) => {
-        return state.filter((bm) => bm.id !== bookmark.id); // the unique identifier is now based on ID
+        return state.filter((oneBookmark) => oneBookmark.id !== bookmark.id); // the unique identifier is now based on ID
+    }),
+    on(BookmarkActions.editBookmark, (state, bookmark) => {
+        state = state.filter((oneBookmark) => oneBookmark.id !== bookmark.id); // remove the old one first
+        return [...state, bookmark]; // then add the edited one
     }),
 );

@@ -11,5 +11,10 @@ export const removeBookmark = createAction(
     props<Bookmark>()
 );
 
+export const editBookmark = createAction(
+    '[Bookmark List] Edit Bookmark',
+    props<Bookmark>()
+);
+
 
 

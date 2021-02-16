@@ -8,3 +8,15 @@ body { margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-wrapper {
     padding-bottom: 1em !important;
 }
+
+/* to maximize the width of the form and the button within the card/modal */
+.full-width {
+    width: 100% !important;
+    min-width: unset !important;
+}
+
+/* custom color for the edit/add bookmark button */
+.button-color {
+    background: green !important;
+    color: white !important;
+}
