@@ -2,7 +2,7 @@
     <mat-card>
         <h2 class="title-class">Add Bookmark</h2>
         <mat-card-content>
-            <form [formGroup]="bookmarkForm" #bookmarkFormDirective="ngForm" (ngSubmit)="addBookmark(bookmarkFormDirective)">
+            <form [formGroup]="bookmarkForm" #bookmarkFormDirective="ngForm" (ngSubmit)="addBookmark(bookmarkFormDirective, undefined)">
                 <mat-form-field class="full-width">
                     <mat-label for="title">Name</mat-label>
                     <input matInput type="text" formControlName="title" name="title" required/>

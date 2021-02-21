@@ -11,19 +11,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { BookmarksComponent, EditBookmarkDialog } from './bookmarks/bookmarks.component';
 
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ 
+      keys: ['bookmarks'],
+      rehydrate: true
+    })(reducer);
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 @NgModule({
   declarations: [
     AppComponent,
     BookmarksComponent,
-    AddBookmarkComponent
+    AddBookmarkComponent,
+    EditBookmarkDialog
   ],
   imports: [
     BrowserModule,
@@ -31,7 +43,8 @@ import { bookmarkReducer } from './state/bookmarks.reducer';
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot(
-      { bookmarks: bookmarkReducer }
+      { bookmarks: bookmarkReducer },
+      { metaReducers }
     ),
     BrowserAnimationsModule,
     MatSelectModule,
@@ -41,8 +54,10 @@ import { bookmarkReducer } from './state/bookmarks.reducer';
     MatCardModule,
     MatDividerModule,
     MatIconModule,
+    MatDialogModule,
     FlexLayoutModule
   ],
+  entryComponents: [EditBookmarkDialog],
   providers: [],
   bootstrap: [AppComponent]
 })

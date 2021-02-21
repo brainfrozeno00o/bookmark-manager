@@ -24,10 +24,14 @@
                         <p>Group: {{bookmark.group}}</p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-raised-button color="warn" (click)="removeBookmark(bookmark)">
-                            <mat-icon>delete</mat-icon>
-                            Delete Bookmark
-                        </button>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <button (click)="openEditDialog(bookmark)" mat-mini-fab class="button-color">
+                                <mat-icon>mode_edit</mat-icon>
+                            </button>
+                            <button (click)="removeBookmark(bookmark)" mat-mini-fab color="warn">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </mat-card-actions>
                 </mat-card>
             </div>
