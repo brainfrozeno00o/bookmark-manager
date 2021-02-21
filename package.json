@@ -1,9 +1,9 @@
 {
   "name": "bookmark-manager",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --port $PORT --host 0.0.0.0 --disable-host-check",
+    "start": "ng serve --port 9898 --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

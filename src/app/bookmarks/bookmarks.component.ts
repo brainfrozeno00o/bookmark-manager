@@ -1,9 +1,9 @@
 // this page contains all the logic for showing the bookmarks
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { of, Observable, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Bookmark } from '../model/bookmark-model';
 import { editBookmark, removeBookmark } from '../state/bookmarks.actions';
 import { selectBookmarksByGroup } from '../state/bookmarks.selector';
@@ -14,36 +14,32 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   templateUrl: './bookmarks.component.html',
   styleUrls: ['./bookmarks.component.css']
 })
-export class BookmarksComponent implements OnInit {
+export class BookmarksComponent implements OnInit, OnDestroy {
   bookmarks$: Observable<Bookmark[]>; // the observable to get the current state
   bookmarksSubscription!: Subscription; // to be used for unsubscribing once the component is destroyed
   bookmarks: Bookmark[] = []; // this is needed as the helper for getting the groups, and also for determining the length of all bookmarks
 
-  groups$: Observable<String[]>;
-  groups: String[] = [];
+  groups: String[] = ["All"];
   
-  selected: String = "All"; // this is for the default option in the select options
+  selected: String = this.groups[0]; // this is for the default option in the select options
 
   constructor(
     private store: Store<{ bookmarks: Bookmark[] }>,
     public dialog: MatDialog,
-  ) { 
+  ) {
+    // get all bookmarks from the start and only once 
     this.bookmarks$ = this.store.pipe(select('bookmarks'));
-    // use the default option in creating the observable for the groups
-    this.groups$ = of([this.selected]);
   }
 
   ngOnInit(): void {
     this.bookmarksSubscription = this.bookmarks$.pipe(
-      switchMap(x => {
-        // get all current bookmarks to be then used in the groups observable
-        this.bookmarks = x;
-        // proceed with the inner observable of getting the groups
-        return this.groups$;
+      map(bookmarks => {
+        this.bookmarks = bookmarks;
+        this.groups = ["All", ...new Set(bookmarks.map(bookmark => bookmark.group))];
       })
-    ).subscribe(groups => {
-      this.groups = [...groups, ...new Set(this.bookmarks.map(bookmark => bookmark.group))];
-    })
+    ).subscribe(_ => {
+      console.log(`Subscribed with the following: \nBookmarks: ${this.bookmarks}\nBookmark Groups: ${this.groups}`);
+    });
   }
 
   // only invoked when the select/dropdown is changed
