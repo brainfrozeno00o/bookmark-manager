@@ -6,10 +6,16 @@ The following code in master is now up in **heroku**! To see what it looks like,
 ## Quick Updates
 
 **v0.0.1**
+- Added persistency by saving all the bookmarks in the local storage
 - Added option to edit a bookmark - have used a dialog for this one
 - Changed the buttons in a bookmark card into a button icons, where one is for editing and deleting
 - Edited tab name
 - Fixed some logic and layout of the site
+
+**v0.0.2**
+- Added validator for the URL field in both Add/Edit Bookmark - just don't put "www." or "https://www." or "http://www." at the start please :) 
+- Fixed css for greying out the button when you cannot edit/add a bookmark
+- Centered the title of "Edit Bookmark" upon opening the dialog of editing a bookmark
 
 ### Following text is for a different purpose, please ignore
 ## Solution Description (v0.0.0)
@@ -69,7 +75,7 @@ Regarding user interface, I have mainly created two components, along with the a
 **Limitations of the Solution**
 - The validation in the form is not fully implemented, particularly in the URL as there is no check if the URL ends properly (i.e. no check if the website ends in .com/.org etc.).
 - In terms of deleting a bookmark, there is no warning first to the user if the user is sure to delete the bookmark or not.
-- Refreshing the page will fully remove all bookmarks, as the local storage is not implemented here.
+- ~~Refreshing the page will fully remove all bookmarks, as the local storage is not implemented here.~~ I have already implemented the persistency using `ngrx-store-localstorage` in version 0.0.1
 - The user interface can be further improved.
 ## Screenshots of the Solution
 
