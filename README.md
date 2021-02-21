@@ -1,6 +1,18 @@
 # Bookmark Manager
 
-## Solution Description
+## Heroku
+The following code in master is now up in **heroku**! To see what it looks like, please visit this [site](https://bkmkmanager.herokuapp.com/).
+
+## Quick Updates
+
+**v0.0.1**
+- Added option to edit a bookmark - have used a dialog for this one
+- Changed the buttons in a bookmark card into a button icons, where one is for editing and deleting
+- Edited tab name
+- Fixed some logic and layout of the site
+
+### Following text is for a different purpose, please ignore
+## Solution Description (v0.0.0)
 
 My solution to this use case involves the use of the following libraries in Angular:
 - `ngrx` for handling the state management
