@@ -14,6 +14,7 @@
                     <span matPrefix>www.</span>
                     <input matInput type="text" formControlName="url" name="url" required/>
                     <mat-error *ngIf="bookmarkForm.get('url')?.errors?.required">Please input the URL.</mat-error>
+                    <mat-error *ngIf="bookmarkForm.get('url')?.errors?.invalidUrl">Please input a proper URL without the "www.".</mat-error>
                 </mat-form-field>
                 <br/>
                 <mat-form-field class="full-width">

@@ -1,6 +1,6 @@
 // this page contains all the logic for showing the bookmarks
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { Bookmark } from '../model/bookmark-model';
 import { editBookmark, removeBookmark } from '../state/bookmarks.actions';
 import { selectBookmarksByGroup } from '../state/bookmarks.selector';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StringUtils } from 'turbocommons-ts';
 
 @Component({
   selector: 'app-bookmarks',
@@ -75,12 +76,13 @@ export class BookmarksComponent implements OnInit, OnDestroy {
 
 @Component({
   selector: 'edit-bookmark-dialog',
-  templateUrl: 'edit-bookmark-dialog.html'
+  templateUrl: 'edit-bookmark-dialog.html',
+  styleUrls: ['./bookmarks.component.css']
 })
 export class EditBookmarkDialog{
   editBookmarkForm = this.fb.group({
     title: ['', Validators.required],
-    url: ['', Validators.required],
+    url: ['', [Validators.required, this.validUrlValidator]],
     group: ['', Validators.required],
   });
 
@@ -110,6 +112,20 @@ export class EditBookmarkDialog{
   // invoked when cancelling the edit 
   cancelEdit() {
     this.dialogRef.close();
+  }
+
+  validUrlValidator(control: AbstractControl): {[key: string]: any} | null {
+    if (control.value) {
+      const invalidUrl = { 'invalidUrl': true };
+      // due to the 'www.' found in the form, no need to type www.
+      if (control.value.startsWith("www.") || control.value === "www.") {
+        return invalidUrl;
+      } else {
+        const url = "https://" + control.value; // add the protocol to make sure that is covered
+        return StringUtils.isUrl(url) ? null : invalidUrl;
+      }
+    }
+    return null;
   }
 
 }

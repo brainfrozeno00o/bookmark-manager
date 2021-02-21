@@ -14,9 +14,3 @@ body { margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100% !important;
     min-width: unset !important;
 }
-
-/* custom color for the edit/add bookmark button */
-.button-color {
-    background: green !important;
-    color: white !important;
-}

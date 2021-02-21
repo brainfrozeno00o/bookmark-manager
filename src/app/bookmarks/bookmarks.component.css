@@ -12,3 +12,9 @@
     text-align: center;
     padding-bottom: 10px;
 }
+
+/* custom color for the edit/add bookmark button */
+.button-color {
+    background: green;
+    color: white;
+}

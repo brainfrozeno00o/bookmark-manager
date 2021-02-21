@@ -3,3 +3,9 @@
     margin-bottom: 0px;
     text-align: center;
 }
+
+/* custom color for the edit/add bookmark button */
+.button-color {
+    background: green;
+    color: white;
+}
