@@ -1,9 +1,3 @@
-/* to fix the alignment of the title in the card in the card-content */
-.title-class {
-    margin-bottom: 0px;
-    text-align: center;
-}
-
 /* custom color for the edit/add bookmark button */
 .button-color {
     background: green;

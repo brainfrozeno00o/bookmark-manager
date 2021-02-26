@@ -1,20 +1,20 @@
-.content {
-    padding: 0px;
-}
-
-.content > mat-card {
-    margin-bottom: 16px;
-}
-
-/* to fix the alignment of the title in the card in the card-content */
-.title-class {
-    margin-bottom: 0px;
-    text-align: center;
-    padding-bottom: 10px;
-}
-
 /* custom color for the edit/add bookmark button */
 .button-color {
     background: green;
     color: white;
+}
+
+/* container class for the text if there are no bookmarks yet */
+.container {
+    position: relative;
+    height: 100%
+}
+
+/* position text to the center of the container */
+.container h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }

@@ -10,12 +10,12 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="content">
+    <div class="p-0">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="33%" fxFlex.lt-md="100%" fxFlex.md="50%" *ngFor="let bookmark of bookmarks$ | async">
-                <mat-card>
+                <mat-card class="mb-3">
                     <mat-card-content>
-                        <h2 class="title-class">{{bookmark.title}}</h2>
+                        <h2 class="mb-0 pb-2 text-center">{{bookmark.title}}</h2>
                         <mat-divider></mat-divider>
                         <br/>
                         <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->
@@ -39,7 +39,7 @@
     </div>
 </div>
 <!-- Only show this part when there are no bookmarks at all -->
-<div *ngIf="bookmarks.length === 0">
-    <h2 class="d-flex justify-content-center">You have not put any bookmarks yet...</h2>
+<div class="container" *ngIf="bookmarks.length === 0">
+    <h2>You have not put any bookmarks yet...</h2>
 </div>
 

@@ -1,13 +1,13 @@
-<h2 style="text-align:center;" mat-dialog-title>Edit Bookmark</h2>
+<h2 class="text-center" mat-dialog-title>Edit Bookmark</h2>
 <mat-dialog-content>
     <form [formGroup]="editBookmarkForm">
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
             <mat-label for="title">Name</mat-label>
             <input matInput type="text" name="title" formControlName="title" [value]="editBookmarkForm.get('title')?.value" required/>
             <mat-error *ngIf="editBookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>    
         </mat-form-field>
         <br/>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
             <mat-label for="url">URL</mat-label>
             <span matPrefix>www.</span>
             <input matInput type="text" name="url" formControlName="url" [value]="editBookmarkForm.get('url')?.value" required/>
@@ -15,7 +15,7 @@
             <mat-error *ngIf="editBookmarkForm.get('url')?.errors?.invalidUrl">Please input a proper URL without the "www.".</mat-error>
         </mat-form-field>
         <br/>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
             <mat-label for="group">Group</mat-label>
             <input matInput type="text" name="group" formControlName="group" [value]="editBookmarkForm.get('group')?.value" required/>
             <mat-error *ngIf="editBookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>       
@@ -23,8 +23,8 @@
         <br/>
         <br/>
         <div fxLayout="column" fxLayoutGap="10px">
-            <button (click)="editBookmark()" [disabled]="!editBookmarkForm.valid" class="full-width button-color" mat-raised-button>Save Bookmark</button>
-            <button (click)="cancelEdit()" class="full-width" color="warn" mat-raised-button>Cancel</button>
+            <button (click)="editBookmark()" [disabled]="!editBookmarkForm.valid" class="btn-block button-color" mat-raised-button>Save Bookmark</button>
+            <button (click)="cancelEdit()" class="btn-block" color="warn" mat-raised-button>Cancel</button>
         </div>
     </form>
 </mat-dialog-content>
