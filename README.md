@@ -17,7 +17,21 @@ The following code in master is now up in **heroku**! To see what it looks like,
 - Fixed css for greying out the button when you cannot edit/add a bookmark
 - Centered the title of "Edit Bookmark" upon opening the dialog of editing a bookmark
 
-### Following text is for a different purpose, please ignore
+**v0.0.3**
+- Utilized bootstrap more for designing the layout of the elements in the HTML and added/edited CSS if needed
+- Finally horizontally and vertically centered the text if the user has no bookmarks added yet
+- Changed logic of checking the URL as there now will be two checks: if URL is valid AND has a protocol
+- Changed logic of generating a new ID for each bookmark, but there is a remote chance of collision, will fix this soon
+- Fixed the layout of the forms (edit and add) to show the error messages properly, specially in the URL field
+- Removed the "www." prefix in both edit and add bookmark forms
+- Width of the edit bookmark form will vary depending on the width of the screen
+- Bottom margin of the add bookmark form will vary depending on the width of the screen
+- Different error messages will be shown in the URL field if the URL inputted is either invalid and/or has no protocol
+
+### Following section below is for a different purpose, please ignore it
+<details>
+<summary>Original Solution (v0.0.0)</summary>
+
 ## Solution Description (v0.0.0)
 
 My solution to this use case involves the use of the following libraries in Angular:
@@ -160,3 +174,4 @@ From here, the user can now see the added bookmark, with the view of the new boo
 5) Type `npm install` to install all the dependencies needed to make the website work.
 6) Once done, you can type `ng serve` to run the dev server. To access the site, proceed to `http://localhost:4200/`.
 7) In case you want to do unit tests, you can type `ng test` to check the tests per each component.
+</details>
