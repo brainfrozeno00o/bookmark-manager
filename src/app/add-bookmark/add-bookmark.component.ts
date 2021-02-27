@@ -4,7 +4,6 @@ import { AbstractControl, FormBuilder, FormGroupDirective, Validators } from '@a
 import { Store } from '@ngrx/store';
 import { Bookmark } from '../model/bookmark-model';
 import { addBookmark } from '../state/bookmarks.actions';
-import * as uuid from 'uuid';
 import { StringUtils } from 'turbocommons-ts';
 
 @Component({
@@ -26,9 +25,12 @@ export class AddBookmarkComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  generateUid() {
+    return Date.now().toString(36) + '-' + Math.random().toString(36).substr(2);
+  }
+
   addBookmark(formDirective?: FormGroupDirective, customId?: string): void {
-    this.bookmarkForm.get('url')?.patchValue('https://www.' + this.bookmarkForm.get('url')?.value);
-    const bookmarkId: String = !!customId ? customId : uuid.v4();
+    const bookmarkId: String = !!customId ? customId : this.generateUid();
     const newBookmark: Bookmark = { id: bookmarkId, ...this.bookmarkForm.value};
     this.store.dispatch(addBookmark(newBookmark));
     formDirective?.resetForm();
@@ -37,12 +39,13 @@ export class AddBookmarkComponent implements OnInit {
 
   validUrlValidator(control: AbstractControl): {[key: string]: any} | null {
     if (control.value) {
+      const noProtocol = { 'noProtocol': true };
       const invalidUrl = { 'invalidUrl': true };
-      // due to the 'www.' found in the form, no need to type www.
+      // need the security protocol
       if (control.value.startsWith("www.") || control.value === "www.") {
-        return invalidUrl;
+        return noProtocol;
       } else {
-        const url = "https://" + control.value; // add the protocol to make sure that is covered
+        const url = control.value;
         return StringUtils.isUrl(url) ? null : invalidUrl;
       }
     }

@@ -9,15 +9,15 @@
                     <mat-error *ngIf="bookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>
                 </mat-form-field>
                 <br/>
-                <mat-form-field class="w-100">
+                <mat-form-field class="w-100 mt-2">
                     <mat-label>URL</mat-label>
-                    <span matPrefix>www.</span>
                     <input matInput type="text" formControlName="url" name="url" required/>
                     <mat-error *ngIf="bookmarkForm.get('url')?.errors?.required">Please input the URL.</mat-error>
-                    <mat-error *ngIf="bookmarkForm.get('url')?.errors?.invalidUrl">Please input a proper URL without the "www.".</mat-error>
+                    <mat-error *ngIf="bookmarkForm.get('url')?.errors?.invalidUrl">Please enter a valid URL.</mat-error>
+                    <mat-error *ngIf="bookmarkForm.get('url')?.errors?.noProtocol">Please include the protocol at the start of the URL (e.g. http:// or https://).</mat-error>
                 </mat-form-field>
                 <br/>
-                <mat-form-field class="w-100">
+                <mat-form-field class="w-100 mt-2">
                     <mat-label>Group</mat-label>
                     <input matInput type="text" formControlName="group" name="group" required/>
                     <mat-error *ngIf="bookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>

@@ -18,3 +18,9 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+
+@media(min-width: 540px) {
+    .edit-dialog {
+        width: 360px;
+    }
+}

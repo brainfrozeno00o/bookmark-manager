@@ -95,14 +95,13 @@ export class EditBookmarkDialog{
     this.editBookmarkForm.patchValue({
       id: bookmark.id,
       title: bookmark.title,
-      url: bookmark.url.slice(12),
+      url: bookmark.url,
       group: bookmark.group
     });
   }
   
   // invoked when editing the bookmark
   editBookmark() {
-    this.editBookmarkForm.get('url')?.patchValue('https://www.' + this.editBookmarkForm.get('url')?.value);
     const editedBookmark = { id:this.bookmark.id, ...this.editBookmarkForm.value };
     this.store.dispatch(editBookmark(editedBookmark));
     this.editBookmarkForm.reset();
@@ -116,12 +115,13 @@ export class EditBookmarkDialog{
 
   validUrlValidator(control: AbstractControl): {[key: string]: any} | null {
     if (control.value) {
+      const noProtocol = { 'noProtocol': true };
       const invalidUrl = { 'invalidUrl': true };
-      // due to the 'www.' found in the form, no need to type www.
+      // need the security protocol
       if (control.value.startsWith("www.") || control.value === "www.") {
-        return invalidUrl;
+        return noProtocol;
       } else {
-        const url = "https://" + control.value; // add the protocol to make sure that is covered
+        const url = control.value;
         return StringUtils.isUrl(url) ? null : invalidUrl;
       }
     }

@@ -1,5 +1,5 @@
 <h2 class="text-center" mat-dialog-title>Edit Bookmark</h2>
-<mat-dialog-content>
+<mat-dialog-content class="edit-dialog">
     <form [formGroup]="editBookmarkForm">
         <mat-form-field class="w-100">
             <mat-label for="title">Name</mat-label>
@@ -7,15 +7,15 @@
             <mat-error *ngIf="editBookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>    
         </mat-form-field>
         <br/>
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100 mt-2">
             <mat-label for="url">URL</mat-label>
-            <span matPrefix>www.</span>
             <input matInput type="text" name="url" formControlName="url" [value]="editBookmarkForm.get('url')?.value" required/>
             <mat-error *ngIf="editBookmarkForm.get('url')?.errors?.required">Please input the URL.</mat-error>
-            <mat-error *ngIf="editBookmarkForm.get('url')?.errors?.invalidUrl">Please input a proper URL without the "www.".</mat-error>
+            <mat-error *ngIf="editBookmarkForm.get('url')?.errors?.invalidUrl">Please enter a valid URL.</mat-error>
+            <mat-error *ngIf="editBookmarkForm.get('url')?.errors?.noProtocol">Please include the protocol at the start (e.g. http://.. or https://..).</mat-error>
         </mat-form-field>
         <br/>
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100 mt-2">
             <mat-label for="group">Group</mat-label>
             <input matInput type="text" name="group" formControlName="group" [value]="editBookmarkForm.get('group')?.value" required/>
             <mat-error *ngIf="editBookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>       
