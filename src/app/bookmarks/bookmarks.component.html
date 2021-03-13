@@ -19,9 +19,15 @@
                         <mat-divider></mat-divider>
                         <br/>
                         <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->
-                        <p>URL: <a href={{bookmark.url}}>Click here to go to link!</a> </p>
-                        <br/>
-                        <p>Group: {{bookmark.group}}</p>
+                        <!-- Added the target and rel attributes to open to a new tab with prevention of malicious attacks, please see https://www.freecodecamp.org/news/how-to-use-html-to-open-link-in-new-tab/ for reference -->
+                        <div class="text-center">
+                            <div class="justify-content-center" fxLayout="row" fxLayoutGap="6px">
+                                <p class="mb-0 align-self-center"><a href={{bookmark.url}} [matTooltipClass]="'link-tooltip'" matTooltip="{{bookmark.url}}" matTooltipPosition="above" target="_blank" rel="noopener noreferrer">Click here to go to link!</a> </p>
+                                <mat-icon [matTooltipClass]="'link-tooltip'" matTooltip="Click to copy link to clipboard!" matTooltipPosition="above" role="button" inline="true" (click)="copyLinkToClipboard(bookmark.url)">content_copy</mat-icon>
+                            </div>
+                            <br/>
+                            <p>Group: {{bookmark.group}}</p>
+                        </div>
                     </mat-card-content>
                     <mat-card-actions>
                         <div fxLayout="row" fxLayoutAlign="space-between center">

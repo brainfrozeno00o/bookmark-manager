@@ -8,7 +8,9 @@ import { Bookmark } from '../model/bookmark-model';
 import { editBookmark, removeBookmark } from '../state/bookmarks.actions';
 import { selectBookmarksByGroup } from '../state/bookmarks.selector';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { StringUtils } from 'turbocommons-ts';
+import { Clipboard } from '@angular/cdk/clipboard'
 
 @Component({
   selector: 'app-bookmarks',
@@ -27,6 +29,8 @@ export class BookmarksComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<{ bookmarks: Bookmark[] }>,
     public dialog: MatDialog,
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar
   ) {
     // get all bookmarks from the start and only once 
     this.bookmarks$ = this.store.pipe(select('bookmarks'));
@@ -64,6 +68,15 @@ export class BookmarksComponent implements OnInit, OnDestroy {
   // open the edit dialog
   openEditDialog(bookmark: Bookmark) {
     const dialogRef = this.dialog.open(EditBookmarkDialog, {data: bookmark});
+  }
+
+  // copy the link to the clipboard
+  copyLinkToClipboard(bookmarkUrl: string) {
+    if (this.clipboard.copy(bookmarkUrl)) {
+      this.snackBar.open("Successfully copied to clipboard!", undefined, {
+        duration: 2000,
+      });
+    }
   }
 
   // destroy subscription
