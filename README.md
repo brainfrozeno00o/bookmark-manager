@@ -28,6 +28,13 @@ The following code in master is now up in **heroku**! To see what it looks like,
 - Bottom margin of the add bookmark form will vary depending on the width of the screen
 - Different error messages will be shown in the URL field if the URL inputted is either invalid and/or has no protocol
 
+**v0.0.4**
+- Centered contents of the card instead of aligning to the left
+- Clicking on the hyperlink with the left mouse button now opens the link into a new tab instead
+- Hover was implemented on the hyperlink and on the content copy icon
+- Speaking of content copy icon, clicking on it will copy the link corresponding to that card
+- Added a snackbar message once the link is copied successfully to the clipboard
+- Changed the overall font of the entire application
 ### Following section below is for a different purpose, please ignore it
 <details>
 <summary>Original Solution (v0.0.0)</summary>
