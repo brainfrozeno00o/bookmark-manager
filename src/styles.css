@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
-body { margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .mat-form-field-flex {
     padding: 5px 5px 0px 5px !important;
 }
-.mat-form-field-wrapper {
+
+.mat-form-field-wrapper{
     padding-bottom: 1em !important;
 }
 

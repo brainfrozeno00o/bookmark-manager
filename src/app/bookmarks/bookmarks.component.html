@@ -2,9 +2,9 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
         <h2>Your Bookmarks</h2>
         <div>
-            <mat-form-field appearance="fill">
+            <mat-form-field>
                 <mat-label>Choose Bookmark Group</mat-label>
-                <mat-select (selectionChange)="showCurrentGroup($event.value)" [(value)]="selected" [(ngModel)]="selected">
+                <mat-select (selectionChange)="showCurrentGroup($event.value)" [(value)]="selected" [(ngModel)]="selected" disableRipple>
                     <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -23,7 +23,7 @@
                         <div class="text-center">
                             <div class="justify-content-center" fxLayout="row" fxLayoutGap="6px">
                                 <p class="mb-0 align-self-center"><a href={{bookmark.url}} [matTooltipClass]="'link-tooltip'" matTooltip="{{bookmark.url}}" matTooltipPosition="above" target="_blank" rel="noopener noreferrer">Click here to go to link!</a> </p>
-                                <mat-icon [matTooltipClass]="'link-tooltip'" matTooltip="Click to copy link to clipboard!" matTooltipPosition="above" role="button" inline="true" (click)="copyLinkToClipboard(bookmark.url)">content_copy</mat-icon>
+                                <mat-icon class="copy-icon" [matTooltipClass]="'link-tooltip'" matTooltip="Click to copy link to clipboard!" matTooltipPosition="above" role="button" inline="true" (click)="copyLinkToClipboard(bookmark.url)">content_copy</mat-icon>
                             </div>
                             <br/>
                             <p>Group: {{bookmark.group}}</p>
@@ -31,11 +31,11 @@
                     </mat-card-content>
                     <mat-card-actions>
                         <div fxLayout="row" fxLayoutAlign="space-between center">
-                            <button (click)="openEditDialog(bookmark)" mat-mini-fab class="button-color">
-                                <mat-icon>mode_edit</mat-icon>
+                            <button [matTooltipClass]="'link-tooltip'" matTooltip="Edit Bookmark" matTooltipPosition="above" (click)="openEditDialog(bookmark)" mat-mini-fab class="button-color">
+                                <mat-icon class="align-self-center">mode_edit</mat-icon>
                             </button>
-                            <button (click)="removeBookmark(bookmark)" mat-mini-fab color="warn">
-                                <mat-icon>delete</mat-icon>
+                            <button [matTooltipClass]="'link-tooltip'" matTooltip="Delete Bookmark" matTooltipPosition="above" (click)="openDeleteDialog(bookmark)" mat-mini-fab color="warn">
+                                <mat-icon class="align-self-center">delete</mat-icon>
                             </button>
                         </div>
                     </mat-card-actions>

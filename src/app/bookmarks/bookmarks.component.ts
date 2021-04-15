@@ -3,7 +3,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Bookmark } from '../model/bookmark-model';
 import { editBookmark, removeBookmark } from '../state/bookmarks.actions';
 import { selectBookmarksByGroup } from '../state/bookmarks.selector';
@@ -42,9 +42,7 @@ export class BookmarksComponent implements OnInit, OnDestroy {
         this.bookmarks = bookmarks;
         this.groups = ["All", ...new Set(bookmarks.map(bookmark => bookmark.group))];
       })
-    ).subscribe(_ => {
-      console.log(`Subscribed with the following: \nBookmarks: ${this.bookmarks}\nBookmark Groups: ${this.groups}`);
-    });
+    ).subscribe();
   }
 
   // only invoked when the select/dropdown is changed
@@ -67,7 +65,16 @@ export class BookmarksComponent implements OnInit, OnDestroy {
 
   // open the edit dialog
   openEditDialog(bookmark: Bookmark) {
-    const dialogRef = this.dialog.open(EditBookmarkDialog, {data: bookmark});
+    this.dialog.open(EditBookmarkDialog, {data: bookmark, restoreFocus: false});
+  }
+
+  // open the delete dialog
+  openDeleteDialog(bookmark: Bookmark) {
+    let deleteDialog = this.dialog.open(DeleteBookmarkDialog, {data: bookmark, restoreFocus: false});
+
+    deleteDialog.afterClosed().pipe(take(1)).subscribe(result => {
+      if (result) this.removeBookmark(result.data);
+    });
   }
 
   // copy the link to the clipboard
@@ -87,6 +94,7 @@ export class BookmarksComponent implements OnInit, OnDestroy {
   }
 }
 
+// Edit Bookmark Dialog
 @Component({
   selector: 'edit-bookmark-dialog',
   templateUrl: 'edit-bookmark-dialog.html',
@@ -141,4 +149,27 @@ export class EditBookmarkDialog{
     return null;
   }
 
+}
+
+// Delete Bookmark Dialog
+@Component({
+  selector: 'delete-bookmark-dialog',
+  templateUrl: 'delete-bookmark-dialog.html',
+  styleUrls: ['./bookmarks.component.css'] 
+})
+export class DeleteBookmarkDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DeleteBookmarkDialog>,
+    @Inject(MAT_DIALOG_DATA) public bookmark: Bookmark
+  ) {}
+
+  // take note of the bookmark upon closing
+  deleteBookmark() {
+    this.dialogRef.close({data: this.bookmark});
+  }
+
+  // cancel deleting the bookmark
+  cancelDelete() {
+    this.dialogRef.close();
+  }
 }

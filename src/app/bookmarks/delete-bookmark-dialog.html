@@ -1,0 +1,8 @@
+<h2 class="text-center mb-2">Delete Bookmark</h2>
+<mat-dialog-content class="delete-dialog">
+    <p class="text-center"><strong>Are you sure you want to delete this bookmark?</strong></p>
+    <div fxLayout="row" fxLayoutGap="10px" class="align-items-center">
+        <button (click)="deleteBookmark()"color="warn" class="btn-block" mat-raised-button>Yes</button>
+        <button (click)="cancelDelete()" class="btn-block button-color mt-0" mat-raised-button>No</button>
+    </div>
+</mat-dialog-content>

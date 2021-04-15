@@ -19,6 +19,12 @@
     transform: translate(-50%, -50%);
 }
 
+/* fix aligment of copy to clipboard icon */
+.copy-icon {
+    position: relative;
+    top: 1px;
+}
+
 @media(min-width: 540px) {
     .edit-dialog {
         width: 360px;

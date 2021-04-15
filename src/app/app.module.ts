@@ -18,7 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
-import { BookmarksComponent, EditBookmarkDialog } from './bookmarks/bookmarks.component';
+import { BookmarksComponent, DeleteBookmarkDialog, EditBookmarkDialog } from './bookmarks/bookmarks.component';
 
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
@@ -37,7 +37,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppComponent,
     BookmarksComponent,
     AddBookmarkComponent,
-    EditBookmarkDialog
+    EditBookmarkDialog,
+    DeleteBookmarkDialog,
   ],
   imports: [
     BrowserModule,
