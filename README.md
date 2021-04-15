@@ -35,6 +35,14 @@ The following code in master is now up in **heroku**! To see what it looks like,
 - Speaking of content copy icon, clicking on it will copy the link corresponding to that card
 - Added a snackbar message once the link is copied successfully to the clipboard
 - Changed the overall font of the entire application
+
+**v0.0.5**
+- Centered icons for editing/deleting a bookmark
+- Added text when hovering the buttons for editing/deleting a bookmark
+- Added a warning dialog when deleting a bookmark; basically need confirmation before deleting a bookmark
+- Removed gray background in the dropdown for choosing a bookmark group
+- Made the font consistent in the Edit Bookmark dialog
+
 ### Following section below is for a different purpose, please ignore it
 <details>
 <summary>Original Solution (v0.0.0)</summary>
