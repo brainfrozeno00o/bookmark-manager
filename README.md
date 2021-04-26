@@ -43,6 +43,14 @@ The following code in master is now up in **heroku**! To see what it looks like,
 - Removed gray background in the dropdown for choosing a bookmark group
 - Made the font consistent in the Edit Bookmark dialog
 
+**v0.0.6**
+- Show 2 bookmarks per row by default from medium-sized screens and greater; less than that it will be 1 bookmark
+- Added a 40-character limit for naming a bookmark
+- Added a 20-character limit for naming a group
+- Errors on specific fields will now show while the user is typing instead of when the field is out of focus (edit/add bookmark)
+- If a bookmark name has more than 20 characters, it will be condensed to at max 20 characters in a bookmark card.
+- If a bookmark name has more than 20 characters, hovering on top of the condensed name will show the full bookmark name.
+
 ### Following section below is for a different purpose, please ignore it
 <details>
 <summary>Original Solution (v0.0.0)</summary>
