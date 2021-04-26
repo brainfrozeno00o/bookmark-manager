@@ -7,6 +7,7 @@
                     <mat-label for="title">Name</mat-label>
                     <input matInput type="text" formControlName="title" name="title" required/>
                     <mat-error *ngIf="bookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>
+                    <mat-error *ngIf="bookmarkForm.get('title')?.errors?.maxlength">Please input a bookmark name with less than 40 characters.</mat-error>
                 </mat-form-field>
                 <br/>
                 <mat-form-field class="w-100 mt-2">
@@ -21,6 +22,7 @@
                     <mat-label>Group</mat-label>
                     <input matInput type="text" formControlName="group" name="group" required/>
                     <mat-error *ngIf="bookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>
+                    <mat-error *ngIf="bookmarkForm.get('group')?.errors?.maxlength">Please input the group with less than 20 characters.</mat-error>
                 </mat-form-field>
                 <br/>
                 <br/>

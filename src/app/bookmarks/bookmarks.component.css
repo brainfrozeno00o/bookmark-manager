@@ -30,3 +30,12 @@
         width: 360px;
     }
 }
+
+/* fix long bookmark names */
+.bookmark-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+    margin: 0 auto;
+}

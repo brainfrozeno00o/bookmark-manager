@@ -4,7 +4,8 @@
         <mat-form-field class="w-100">
             <mat-label for="title">Name</mat-label>
             <input matInput type="text" name="title" formControlName="title" [value]="editBookmarkForm.get('title')?.value" required/>
-            <mat-error *ngIf="editBookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>    
+            <mat-error *ngIf="editBookmarkForm.get('title')?.errors?.required">Please input a bookmark name.</mat-error>
+            <mat-error *ngIf="editBookmarkForm.get('title')?.errors?.maxlength">Please input a bookmark name with less than 40 characters.</mat-error> 
         </mat-form-field>
         <br/>
         <mat-form-field class="w-100 mt-2">
@@ -18,7 +19,8 @@
         <mat-form-field class="w-100 mt-2">
             <mat-label for="group">Group</mat-label>
             <input matInput type="text" name="group" formControlName="group" [value]="editBookmarkForm.get('group')?.value" required/>
-            <mat-error *ngIf="editBookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>       
+            <mat-error *ngIf="editBookmarkForm.get('group')?.errors?.required">Please input the group.</mat-error>
+            <mat-error *ngIf="editBookmarkForm.get('group')?.errors?.maxlength">Please input the group with less than 20 characters.</mat-error>      
         </mat-form-field>
         <br/>
         <br/>

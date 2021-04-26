@@ -1,10 +1,11 @@
 // this page contains all the logic for adding a bookmark
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Bookmark } from '../model/bookmark-model';
 import { addBookmark } from '../state/bookmarks.actions';
 import { StringUtils } from 'turbocommons-ts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-bookmark',
@@ -13,16 +14,34 @@ import { StringUtils } from 'turbocommons-ts';
 })
 
 
-export class AddBookmarkComponent implements OnInit {
+export class AddBookmarkComponent implements OnInit, OnDestroy {
   bookmarkForm = this.fb.group({
-    title: ['', Validators.required],
+    title: ['', [Validators.required, Validators.maxLength(40)]],
     url: ['', [Validators.required, this.validUrlValidator]],
-    group: ['', Validators.required],
+    group: ['', [Validators.required, Validators.maxLength(20)]],
   });
+
+  bookmarkFormSubscription: Subscription | undefined;
 
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.bookmarkFormSubscription = this.bookmarkForm.valueChanges.subscribe(form => {
+      // if the user is currently typing in the bookmark name field, the error will now appear if an error occurs in that field
+      if (!!form.title) {
+        this.bookmarkForm.controls.title.markAsTouched();
+      }
+
+      // if the user is currently typing in the bookmark URL field, the error will now appear if an error occurs in that field
+      if (!!form.url) {
+        this.bookmarkForm.controls.url.markAsTouched();
+      }
+
+      // if the user is currently typing in the bookmark group field, the error will now appear if an error occurs in that field
+      if (!!form.group) {
+        this.bookmarkForm.controls.group.markAsTouched();
+      }
+    });
   }
 
   generateUid() {
@@ -52,4 +71,9 @@ export class AddBookmarkComponent implements OnInit {
     return null;
   }
 
+  ngOnDestroy() {
+    if (this.bookmarkFormSubscription) {
+      this.bookmarkFormSubscription.unsubscribe();
+    }
+  }
 }

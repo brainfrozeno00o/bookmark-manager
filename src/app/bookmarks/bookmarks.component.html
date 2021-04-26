@@ -12,10 +12,10 @@
     </div>
     <div class="p-0">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="33%" fxFlex.lt-md="100%" fxFlex.md="50%" *ngFor="let bookmark of bookmarks$ | async">
+            <div fxFlex="50%" fxFlex.lt-md="100%" *ngFor="let bookmark of bookmarks$ | async">
                 <mat-card class="mb-3">
                     <mat-card-content>
-                        <h2 class="mb-0 pb-2 text-center">{{bookmark.title}}</h2>
+                        <h2 class="mb-0 pb-2 text-center bookmark-name" [matTooltipClass]="'link-tooltip'" [matTooltip]="bookmark.title.length > 20 ? bookmark.title : ''" matTooltipPosition="above">{{bookmark.title}}</h2>
                         <mat-divider></mat-divider>
                         <br/>
                         <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->

@@ -100,12 +100,14 @@ export class BookmarksComponent implements OnInit, OnDestroy {
   templateUrl: 'edit-bookmark-dialog.html',
   styleUrls: ['./bookmarks.component.css']
 })
-export class EditBookmarkDialog{
+export class EditBookmarkDialog implements OnInit, OnDestroy{
   editBookmarkForm = this.fb.group({
-    title: ['', Validators.required],
+    title: ['', [Validators.required, Validators.maxLength(40)]],
     url: ['', [Validators.required, this.validUrlValidator]],
-    group: ['', Validators.required],
+    group: ['', [Validators.required, Validators.maxLength(40)]],
   });
+
+  editBookmarkFormSubscription: Subscription | undefined;
 
   constructor(
     public dialogRef: MatDialogRef<EditBookmarkDialog>,
@@ -118,6 +120,25 @@ export class EditBookmarkDialog{
       title: bookmark.title,
       url: bookmark.url,
       group: bookmark.group
+    });
+  }
+
+  ngOnInit() {
+    this.editBookmarkFormSubscription = this.editBookmarkForm.valueChanges.subscribe(form => {
+      // if the user is currently typing in the bookmark name field, the error will now appear if an error occurs in that field
+      if (!!form.title) {
+        this.editBookmarkForm.controls.title.markAsTouched();
+      }
+
+      // if the user is currently typing in the bookmark URL field, the error will now appear if an error occurs in that field
+      if (!!form.url) {
+        this.editBookmarkForm.controls.url.markAsTouched();
+      }
+
+      // if the user is currently typing in the bookmark group field, the error will now appear if an error occurs in that field
+      if (!!form.group) {
+        this.editBookmarkForm.controls.group.markAsTouched();
+      }
     });
   }
   
@@ -147,6 +168,12 @@ export class EditBookmarkDialog{
       }
     }
     return null;
+  }
+
+  ngOnDestroy() {
+    if (this.editBookmarkFormSubscription) {
+      this.editBookmarkFormSubscription.unsubscribe();
+    }
   }
 
 }
