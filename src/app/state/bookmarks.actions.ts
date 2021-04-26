@@ -1,20 +1,17 @@
-import { createAction, props } from "@ngrx/store";
-import { Bookmark } from "../model/bookmark-model";
+import { createAction, props } from '@ngrx/store';
+import { Bookmark } from '../model/bookmark-model';
 
 export const addBookmark = createAction(
-    '[Bookmark List] Add Bookmark',
-    props<Bookmark>()
+  '[Bookmark List] Add Bookmark',
+  props<Bookmark>()
 );
 
 export const removeBookmark = createAction(
-    '[Bookmark List] Remove Bookmark',
-    props<Bookmark>()
+  '[Bookmark List] Remove Bookmark',
+  props<Bookmark>()
 );
 
 export const editBookmark = createAction(
-    '[Bookmark List] Edit Bookmark',
-    props<Bookmark>()
+  '[Bookmark List] Edit Bookmark',
+  props<Bookmark>()
 );
-
-
-

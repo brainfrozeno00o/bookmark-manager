@@ -1,41 +1,41 @@
 /* custom color for the edit/add bookmark button */
 .button-color {
-    background: green;
-    color: white;
+  background: green;
+  color: white;
 }
 
 /* container class for the text if there are no bookmarks yet */
 .container {
-    position: relative;
-    height: 100%
+  position: relative;
+  height: 100%
 }
 
 /* position text to the center of the container */
 .container h2 {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 /* fix aligment of copy to clipboard icon */
 .copy-icon {
-    position: relative;
-    top: 1px;
+  position: relative;
+  top: 1px;
 }
 
 @media(min-width: 540px) {
-    .edit-dialog {
-        width: 360px;
-    }
+  .edit-dialog {
+    width: 360px;
+  }
 }
 
 /* fix long bookmark names */
 .bookmark-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 20ch;
-    margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+  margin: 0 auto;
 }

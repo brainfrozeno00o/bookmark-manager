@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,8 +38,8 @@ describe('BookmarksComponent', () => {
         MatIconModule,
         FlexLayoutModule,
       ],
-      declarations: [ BookmarksComponent ],
-      providers: [provideMockStore()]
+      declarations: [BookmarksComponent],
+      providers: [provideMockStore()],
     });
   });
 
@@ -47,34 +47,34 @@ describe('BookmarksComponent', () => {
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(BookmarksComponent);
     component = fixture.componentInstance;
-  
+
     mockBookmarksSelector = store.overrideSelector('bookmarks', [
       {
         id: '1',
         title: 'Facebook',
         url: 'facebook.com',
-        group: 'Social'
+        group: 'Social',
       },
       {
         id: '2',
         title: 'Twitter',
         url: 'twitter.com',
-        group: 'Social'
+        group: 'Social',
       },
       {
         id: '3',
         title: 'Instagram',
         url: 'instagram.com',
-        group: 'Social'
+        group: 'Social',
       },
       {
         id: '4',
         title: 'Synpulse',
         url: 'synpulse.com',
-        group: 'Work'
+        group: 'Work',
       },
     ]);
-  })
+  });
 
   it('Should create the Add Bookmark Component', () => {
     expect(component).toBeTruthy();
@@ -86,14 +86,14 @@ describe('BookmarksComponent', () => {
       id: '4',
       title: 'Synpulse',
       url: 'synpulse.com',
-      group: 'Work'
+      group: 'Work',
     });
     expect(store.dispatch).toHaveBeenCalledWith(
       removeBookmark({
         id: '4',
         title: 'Synpulse',
         url: 'synpulse.com',
-        group: 'Work'
+        group: 'Work',
       })
     );
   });

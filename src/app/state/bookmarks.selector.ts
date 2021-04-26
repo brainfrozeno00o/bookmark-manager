@@ -5,9 +5,9 @@ import { BookmarkState } from './bookmarks.state';
 export const selectBookmarks = (state: BookmarkState) => state.bookmarks;
 
 export const selectBookmarksByGroup = createSelector(
-    selectBookmarks,
-    (bookmarks: Bookmark[], props: String) => {
-        if (props === "All") return bookmarks;
-        else return bookmarks.filter(bookmark => bookmark.group === props);
-    }
-)
+  selectBookmarks,
+  (bookmarks: Bookmark[], props: String) => {
+    if (props === 'All') return bookmarks;
+    else return bookmarks.filter((bookmark) => bookmark.group === props);
+  }
+);

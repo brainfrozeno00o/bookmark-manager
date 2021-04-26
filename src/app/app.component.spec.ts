@@ -5,12 +5,8 @@ import { MatDividerModule } from '@angular/material/divider';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatDividerModule,
-      ],
-      declarations: [
-        AppComponent,
-      ],
+      imports: [MatDividerModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
@@ -24,6 +20,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h2').textContent).toContain('Bookmark Manager');
+    expect(compiled.querySelector('h2').textContent).toContain(
+      'Bookmark Manager'
+    );
   });
 });

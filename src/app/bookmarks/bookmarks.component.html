@@ -1,51 +1,59 @@
 <div *ngIf="bookmarks.length > 0">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-        <h2>Your Bookmarks</h2>
-        <div>
-            <mat-form-field>
-                <mat-label>Choose Bookmark Group</mat-label>
-                <mat-select (selectionChange)="showCurrentGroup($event.value)" [(value)]="selected" [(ngModel)]="selected" disableRipple>
-                    <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <h2>Your Bookmarks</h2>
+    <div>
+      <mat-form-field>
+        <mat-label>Choose Bookmark Group</mat-label>
+        <mat-select (selectionChange)="showCurrentGroup($event.value)" [(value)]="selected" [(ngModel)]="selected"
+          disableRipple>
+          <mat-option *ngFor="let choice of groups" [value]="choice">{{ choice }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div class="p-0">
-        <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="50%" fxFlex.lt-md="100%" *ngFor="let bookmark of bookmarks$ | async">
-                <mat-card class="mb-3">
-                    <mat-card-content>
-                        <h2 class="mb-0 pb-2 text-center bookmark-name" [matTooltipClass]="'link-tooltip'" [matTooltip]="bookmark.title.length > 20 ? bookmark.title : ''" matTooltipPosition="above">{{bookmark.title}}</h2>
-                        <mat-divider></mat-divider>
-                        <br/>
-                        <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->
-                        <!-- Added the target and rel attributes to open to a new tab with prevention of malicious attacks, please see https://www.freecodecamp.org/news/how-to-use-html-to-open-link-in-new-tab/ for reference -->
-                        <div class="text-center">
-                            <div class="justify-content-center" fxLayout="row" fxLayoutGap="6px">
-                                <p class="mb-0 align-self-center"><a href={{bookmark.url}} [matTooltipClass]="'link-tooltip'" matTooltip="{{bookmark.url}}" matTooltipPosition="above" target="_blank" rel="noopener noreferrer">Click here to go to link!</a> </p>
-                                <mat-icon class="copy-icon" [matTooltipClass]="'link-tooltip'" matTooltip="Click to copy link to clipboard!" matTooltipPosition="above" role="button" inline="true" (click)="copyLinkToClipboard(bookmark.url)">content_copy</mat-icon>
-                            </div>
-                            <br/>
-                            <p>Group: {{bookmark.group}}</p>
-                        </div>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <div fxLayout="row" fxLayoutAlign="space-between center">
-                            <button [matTooltipClass]="'link-tooltip'" matTooltip="Edit Bookmark" matTooltipPosition="above" (click)="openEditDialog(bookmark)" mat-mini-fab class="button-color">
-                                <mat-icon class="align-self-center">mode_edit</mat-icon>
-                            </button>
-                            <button [matTooltipClass]="'link-tooltip'" matTooltip="Delete Bookmark" matTooltipPosition="above" (click)="openDeleteDialog(bookmark)" mat-mini-fab color="warn">
-                                <mat-icon class="align-self-center">delete</mat-icon>
-                            </button>
-                        </div>
-                    </mat-card-actions>
-                </mat-card>
+  </div>
+  <div class="p-0">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="50%" fxFlex.lt-md="100%" *ngFor="let bookmark of bookmarks$ | async">
+        <mat-card class="mb-3">
+          <mat-card-content>
+            <h2 class="mb-0 pb-2 text-center bookmark-name" [matTooltipClass]="'link-tooltip'"
+              [matTooltip]="bookmark.title.length > 20 ? bookmark.title : ''" matTooltipPosition="above">
+              {{bookmark.title}}</h2>
+            <mat-divider></mat-divider>
+            <br />
+            <!-- Made it a constant text with the hyperlink of the link to keep the size of the card constant -->
+            <!-- Added the target and rel attributes to open to a new tab with prevention of malicious attacks, please see https://www.freecodecamp.org/news/how-to-use-html-to-open-link-in-new-tab/ for reference -->
+            <div class="text-center">
+              <div class="justify-content-center" fxLayout="row" fxLayoutGap="6px">
+                <p class="mb-0 align-self-center"><a href={{bookmark.url}} [matTooltipClass]="'link-tooltip'"
+                    matTooltip="{{bookmark.url}}" matTooltipPosition="above" target="_blank"
+                    rel="noopener noreferrer">Click here to go to link!</a> </p>
+                <mat-icon class="copy-icon" [matTooltipClass]="'link-tooltip'"
+                  matTooltip="Click to copy link to clipboard!" matTooltipPosition="above" role="button" inline="true"
+                  (click)="copyLinkToClipboard(bookmark.url)">content_copy</mat-icon>
+              </div>
+              <br />
+              <p>Group: {{bookmark.group}}</p>
             </div>
-        </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <button [matTooltipClass]="'link-tooltip'" matTooltip="Edit Bookmark" matTooltipPosition="above"
+                (click)="openEditDialog(bookmark)" mat-mini-fab class="button-color">
+                <mat-icon class="align-self-center">mode_edit</mat-icon>
+              </button>
+              <button [matTooltipClass]="'link-tooltip'" matTooltip="Delete Bookmark" matTooltipPosition="above"
+                (click)="openDeleteDialog(bookmark)" mat-mini-fab color="warn">
+                <mat-icon class="align-self-center">delete</mat-icon>
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Only show this part when there are no bookmarks at all -->
 <div class="container" *ngIf="bookmarks.length === 0">
-    <h2>You have not put any bookmarks yet...</h2>
+  <h2>You have not put any bookmarks yet...</h2>
 </div>
-

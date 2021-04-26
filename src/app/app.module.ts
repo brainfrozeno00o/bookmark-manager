@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,22 +13,28 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
-import { BookmarksComponent, DeleteBookmarkDialog, EditBookmarkDialog } from './bookmarks/bookmarks.component';
+import {
+  BookmarksComponent,
+  DeleteBookmarkDialog,
+  EditBookmarkDialog,
+} from './bookmarks/bookmarks.component';
 
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { bookmarkReducer } from './state/bookmarks.reducer';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ 
-      keys: ['bookmarks'],
-      rehydrate: true
-    })(reducer);
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return localStorageSync({
+    keys: ['bookmarks'],
+    rehydrate: true,
+  })(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
@@ -45,10 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot(
-      { bookmarks: bookmarkReducer },
-      { metaReducers }
-    ),
+    StoreModule.forRoot({ bookmarks: bookmarkReducer }, { metaReducers }),
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -60,10 +63,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MatDialogModule,
     MatTooltipModule,
     MatSnackBarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   entryComponents: [EditBookmarkDialog],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
